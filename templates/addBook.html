@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <title>1k b4 K</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="static/js/script.js"></script>
+</head>
+
+<body>
+    <a href="/">Home</a>
+   <h1>Add a read book to your library</h1>
+   <div class="add-book-container">
+   <p><img src="{{book_img_thumbnail}}"></p>
+   <p>{{title}}</p>
+   <p>{{book_title}}</p>
+   <p>{{author_name}}</p>
+   <p>{{book_description}}</p>
+   <form id="ratings-form">
+       <span>Child's Name:</span><br>
+       <input type="text" name="child_name"><br>
+       <label for="start">Date Read:</label><br>
+       <input type="date" id="start" name="date_read"><br>
+
+        <span>Rating:</span><br>
+        <select name="rating">
+        <option>How was it?</option>
+        <option>*</option>
+        <option>**</option>
+        <option>***</option>
+        <option>****</option>
+        <option>*****</option>
+    </select>
+    <!-- Fix later with better styling -->
+    <br>
+   </form>
+   <p>Enter any comments from you or your child about the book here. e.g. Fiona loved it!</p>
+   <textarea form="ratings-form"></textarea>
+</div>
+</body>
+</html>

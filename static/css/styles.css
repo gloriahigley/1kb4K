@@ -1,0 +1,55 @@
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 14px;
+}
+
+.inputSection { 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.add-book-container {
+    width: 50%;
+}
+
+input {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.card { 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    background-color: #cccccc;
+    margin: 10px 0 0 0;
+}
+
+.card h2 {
+    font-size: 16px;
+}
+
+#root { 
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="submit"] { 
+    color: #ffffff;
+    background-color: purple;
+    padding: 10px;
+    border-radius: 5%;
+    margin: 5px 0 10px 0;
+}
+
+/* Come back and combine input submit and button CSS */
+
+button { 
+    color: #ffffff;
+    background-color: purple;
+    padding: 10px;
+    border-radius: 5%;
+    margin: 5px 0 10px 0;
+}
