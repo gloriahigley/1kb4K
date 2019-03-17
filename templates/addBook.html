@@ -2,7 +2,7 @@
 <html lang="en-us">
 
 <head>
-    <title>1k b4 K</title>
+    <title>1kb4K</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <script src="static/js/script.js"></script>
 </head>
@@ -12,11 +12,15 @@
    <h1>Add a read book to your library</h1>
    <div class="add-book-container">
    <p><img src="{{book_img_thumbnail}}"></p>
-   <p>{{title}}</p>
+   <input type="hidden" value="{{book_img_thumbnail}}" name="book_img_thumbnail">
+   <form action="/book-confirmation" method="post">
    <p>{{book_title}}</p>
+   <input type="hidden" value="{{book_title}}" name="book_title">
    <p>{{author_name}}</p>
+   <input type="hidden" value="{{author_name}}" name="author_name">
    <p>{{book_description}}</p>
-   <form id="ratings-form">
+   <input type="hidden" value="{{book_description}}" name="book_description">
+   <!-- <form id="ratings-form">
        <span>Child's Name:</span><br>
        <input type="text" name="child_name"><br>
        <label for="start">Date Read:</label><br>
@@ -30,12 +34,14 @@
         <option>***</option>
         <option>****</option>
         <option>*****</option>
-    </select>
+    </select> -->
     <!-- Fix later with better styling -->
-    <br>
+    <!-- <br>
    </form>
    <p>Enter any comments from you or your child about the book here. e.g. Fiona loved it!</p>
-   <textarea form="ratings-form"></textarea>
+   <textarea form="ratings-form"></textarea> -->
+   <button id="submitButton">Submit</button>
+   </form>
 </div>
 </body>
 </html>

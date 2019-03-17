@@ -35,5 +35,17 @@ def add_book():
     book_description = request.form['book_description']
     return render_template('addBook.html', book_title=book_title, author_name=author_name, book_description=book_description, book_img_thumbnail=book_img_thumbnail)
 
+@app.route('/book-confirmation', methods=['POST'])
+def book_confirmation():
+
+    book_title = request.form['book_title']
+    author_name = request.form['author_name'] 
+    book_description = request.form['book_description']
+    new_book = Book(book_title, author_name, book_description) 
+    db.session.add(new_book)
+    db.session.commit()
+
+    return render_template('bookConfirmation.html', book_title=book_title)
+
 if __name__ == '__main__': 
     app.run()
