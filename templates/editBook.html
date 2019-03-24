@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <title>1kb4K</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="static/js/script.js"></script>
+</head>
+
+<body>
+    <a href="/">Home</a>
+   <h1>Edit read book from your library</h1>
+   <div class="edit-book-container">
+   <form action="/edit-confirmation" method="post">
+    {{book.title}}
+    <input type="hidden" name="book-id" value="{{book.id}}">
+    <input type="text" name="book-title" value=""><br><br>
+   <button id="submitButton">Submit</button>
+   </form>
+</div>
+</body>
+</html>

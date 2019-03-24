@@ -15,6 +15,7 @@ class Book(db.Model):
     title = db.Column(db.String(120))
     author = db.Column(db.String(120))
     description = db.Column(db.String(600))
+    #add image later
 
     def __init__(self, title, author, description):
         self.title = title
@@ -25,7 +26,6 @@ class Book(db.Model):
 def index():
 
     return render_template('index.html')
-
 
 @app.route('/add-book', methods=['POST'])
 def add_book():
@@ -46,6 +46,44 @@ def book_confirmation():
     db.session.commit()
 
     return render_template('bookConfirmation.html', book_title=book_title)
+
+@app.route('/library', methods=['POST', 'GET'])
+def library():
+
+    books = Book.query.all()
+
+    return render_template('library.html', books=books)
+
+@app.route('/delete-book', methods=['POST', 'GET'])
+def delete_book():
+    book_id = int(request.form['book-id'])
+    book = Book.query.get(book_id)
+    db.session.delete(book)
+    db.session.commit()
+
+    return render_template('bookDeletionConfirmation.html', book=book)
+
+@app.route('/edit-book', methods=['POST', 'GET'])
+def edit_book():
+    book_id = int(request.form['book-id'])
+    book = Book.query.get(book_id)
+
+    return render_template('editBook.html', book=book)
+
+@app.route('/edit-confirmation', methods=['POST'])
+def edit_confirmation():
+
+    book_title = request.form['book-title']
+    book_id = request.form['book-id']
+    if len(book_title) > 0:
+        update_book_title = Book.query.filter_by(id=book_id).first()
+        print(update_book_title.title)
+        update_book_title.title = book_title
+        print(update_book_title.title)
+        db.session.commit()
+
+    return render_template('editConfirmation.html', book_title=book_title)
+        
 
 if __name__ == '__main__': 
     app.run()

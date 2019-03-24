@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <title>1kb4K</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="static/js/script.js"></script>
+</head>
+<body>
+    <a href="/">Home</a>
+    <a href="/library">Library</a>
+   <h1>Library</h1>
+   {% if books|length == 0 %}
+   <p>No books yet</p>
+   {% else %}
+
+        {% for book in books %}
+        <div class="library-book">
+        <p><strong>Title:</strong> {{book.title}}</p>
+        <p><strong>Author:</strong> {{book.author}}</p>
+        <p><strong>Description:</strong> {{book.description}}</p>
+        <form method="POST" action="/delete-book" style="display:inline-block;">
+            <input type="hidden" name="book-id" value="{{book.id}}">
+            <input type="hidden" name="book-title" value="{{book.title}}">
+            <input type="submit" value="Delete Book from Library" />
+        </form>
+            <form method="POST" action="/edit-book" style="display:inline-block;">
+            <input type="hidden" name="book-id" value="{{book.id}}">
+            <input type="hidden" name="book-title" value="{{book.title}}">
+            <input type="submit" value="Edit Book Details"/>
+        </form>
+        <hr>
+        </div>
+        {% endfor %}
+
+   {% endif %}
+</body>
+</html>
