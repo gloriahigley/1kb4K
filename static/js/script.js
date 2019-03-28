@@ -1,24 +1,24 @@
 window.onload = function(){
     
     const app = document.getElementById('root');
-
     const container = document.createElement('div');
     container.setAttribute('class', 'container');
-
     app.appendChild(container);
     
-    var j = new XMLHttpRequest();
+    var xhr = new XMLHttpRequest();
     
     submitButton.addEventListener("click",function(){
-        var ISBN = document.getElementById("user-isbn").value;
-        //document.getElementById("content").innerHTML = ISBN;
-        document.getElementById('user-isbn').value='';
+        //document.getElementById('root').innerHTML="";
+        var userInput = document.getElementById("user-isbn").value; //pull user input value from input field
+        var ISBN = userInput.replace("-", "").trim(); //remove any dashes entered and extra trim
         console.log(ISBN);
-        j.addEventListener("readystatechange",function(){
+        document.getElementById('user-isbn').value=''; //clear value entered on submit
+
+        xhr.addEventListener("readystatechange", function(){
             if(this.readyState == 4 && this.status == 200){
-                var data = JSON.parse(j.responseText);
-    
-                            data.items.forEach(book => {
+            var data = JSON.parse(xhr.responseText);
+            data.items.forEach(book => {
+
         //Create a div with a card class
         const card = document.createElement('div');
         card.setAttribute('class', 'card');
@@ -56,22 +56,18 @@ window.onload = function(){
         p_form.setAttribute('type', 'hidden');
         form_test.appendChild(p_form);
         
-        //Create an h1 and set the text content to the book's title
+        //Create an h2 and set the text content to the book's title
         const h2 = document.createElement('h2');
         h2.textContent = book.volumeInfo.title;
-        console.log(book.volumeInfo.title);
                             
         const author = document.createElement('p');
         author.textContent = book.volumeInfo.authors;
-        console.log(book.volumeInfo.description);
                             
         const thumbNail = document.createElement('img');
         thumbNail.src = book.volumeInfo.imageLinks.thumbnail;
-        console.log(book.volumeInfo.imageLinks.thumbnail);
                             
         const p = document.createElement('p');
         p.textContent = book.volumeInfo.description;
-        console.log(book.volumeInfo.description);  
         
         const addBookButton = document.createElement("input"); // Create a <button> element
         addBookButton.setAttribute('type', 'submit')
@@ -90,7 +86,7 @@ window.onload = function(){
             
         });
         
-        j.open("GET",'https://www.googleapis.com/books/v1/volumes?q=isbn:' + ISBN, true);
-        j.send();
+        xhr.open("GET",'https://www.googleapis.com/books/v1/volumes?q=isbn:' + ISBN, true);
+        xhr.send();
     });  
 };
