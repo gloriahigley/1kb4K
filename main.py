@@ -1,5 +1,7 @@
-from flask import Flask, request, redirect, render_template
+from flask import Flask, request, redirect, render_template, session, flash
 from flask_sqlalchemy import SQLAlchemy
+import datetime
+from dateutil import relativedelta
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -16,16 +18,42 @@ class Book(db.Model):
     author = db.Column(db.String(120))
     description = db.Column(db.String(600))
     #image = db.Column(db.String(600)) #added here
+    reader_id = db.Column(db.Integer, db.ForeignKey('reader.id'))
 
     def __init__(self, title, author, description):
         self.title = title
         self.author = author
         self.description = description
+        self.reader_id = reader
+
+class Reader(db.Model):
+    id = db.Column(db.Integer, primary_key=True) #primary key
+    first_name = db.Column(db.String(120))
+    date_of_birth = db.Column(db.Date)
+    books = db.relationship('Book', backref='reader')
+
+    def __init__(self, first_name, date_of_birth):
+        self.first_name = first_name
+        self.date_of_birth = date_of_birth
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
 
     return render_template('index.html')
+
+@app.route('/add-reader', methods=['POST', 'GET'])
+def add_reader():
+    return render_template('addReader.html')
+
+@app.route('/reader-confirmation', methods=['POST', 'GET'])
+def reader_confirmation():
+    reader_first_name = request.form['reader-first-name']
+    reader_dob = request.form['reader-dob'] 
+    new_reader = Reader(reader_first_name, reader_dob) 
+    db.session.add(new_reader)
+    db.session.commit()
+
+    return render_template('addReaderConfirmation.html', name=reader_first_name)
 
 @app.route('/add-book', methods=['POST'])
 def add_book():

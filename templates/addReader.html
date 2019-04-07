@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <title>1kb4K</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="static/js/script.js"></script>
+</head>
+
+<body>
+    <a href="/">Home</a>
+   <h1>Add a Reader to your account</h1>
+   <div class="add-reader-container">
+   <form action="/reader-confirmation" method="post">
+    <label>Enter the reader's first name:</label><br>
+    <input type="text" name="reader-first-name"><br>
+    <label>Enter the reader's date of birth:</label><br>
+    <input type="date" name="reader-dob"><br><br>
+   <button id="submitButton">Submit</button>
+   </form>
+</div>
+</body>
+</html>
