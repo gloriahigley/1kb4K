@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+    <title>1kb4K</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="static/js/script.js"></script>
+</head>
+<body>
+    <div class="header">
+        <a href="/">Home</a>
+        <a href="/library">Library</a>
+        <a href="/add-reader">Add a Reader</a>
+        <a href="/profile">Profile</a>
+        <a href="/logout">Log Out</a>
+    </div>
+    {% with messages = get_flashed_messages() %}
+    <ul>
+    {% for message in messages %}
+        <li>{{message}}</li>
+    {% endfor %}
+    </ul>
+    {% endwith %}
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

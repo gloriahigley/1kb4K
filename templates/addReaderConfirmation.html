@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="en-us">
+{% extends "base.html" %}
 
-<head>
-    <title>1kb4K</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <script src="static/js/script.js"></script>
-</head>
-
-<body>
-    <a href="/">Home</a>
-        <a href="/library">Library</a>
+{% block content %}
    <h1>Yay! {{name}} have been added to your account!</h1>
    <p> <a href="/">Search for more books</a> or <a href="/library">go to your library</a></p>
-</body>
-</html>
+{% endblock %}

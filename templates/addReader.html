@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en-us">
+{% extends "base.html" %}
 
-<head>
-    <title>1kb4K</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <script src="static/js/script.js"></script>
-</head>
-
-<body>
-    <a href="/">Home</a>
+{% block content %}
    <h1>Add a Reader to your account</h1>
    <div class="add-reader-container">
    <form action="/reader-confirmation" method="post">
@@ -18,6 +10,4 @@
     <input type="date" name="reader-dob"><br><br>
    <button id="submitButton">Submit</button>
    </form>
-</div>
-</body>
-</html>
+{% endblock %}

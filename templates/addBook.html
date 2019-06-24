@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en-us">
+{% extends "base.html" %}
 
-<head>
-    <title>1kb4K</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <script src="static/js/script.js"></script>
-</head>
-
-<body>
-    <a href="/">Home</a>
+{% block content %}
    <h1>Add a read book to your library</h1>
    <div class="add-book-container">
    <p><img src="{{book_img_thumbnail}}"></p>
@@ -20,6 +12,15 @@
    <input type="hidden" value="{{author_name}}" name="author_name">
    <p>{{book_description}}</p>
    <input type="hidden" value="{{book_description}}" name="book_description">
+
+   {% if reader|length == 0 %}
+   <p>No readers yet. Go to <a href='/add-reader'>Add Reader</a> to start tracking for a new reader.</p>
+   {% else %}
+   <p><strong>Which reader?</strong></p>
+   {% for reader in reader %}
+   <input type="checkbox" name="reader_id" value="{{reader.id}}">{{reader.first_name}} <br>
+   <!-- <input type="hidden" value="{{reader.id}}" name="reader_id"> <br> Fix shitty styling -->
+   {% endfor %}
    <!-- <form id="ratings-form">
        <span>Child's Name:</span><br>
        <input type="text" name="child_name"><br>
@@ -42,6 +43,5 @@
    <textarea form="ratings-form"></textarea> -->
    <button id="submitButton">Submit</button>
    </form>
-</div>
-</body>
-</html>
+   {% endif %}
+{% endblock %}

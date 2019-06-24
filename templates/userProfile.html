@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+   <h1>Account Information</h1>
+   <p> {{user.email}}</p>
+   <!-- <p> {{user.readers}}</p> -->
+   {% for reader_id in reader_id %}
+   <p> {{reader_id.first_name}}</p>
+   {% endfor %}
+   <p>{{user.id}}</p>
+   <p> {{user.readers.first_name}}</p>
+   <p> {{readers}}</p>
+   {% for reader in readers %}
+   <p> {{readers.first_name}}</p>
+   {% endfor %}
+{% endblock %}
